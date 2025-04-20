@@ -1,0 +1,23 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:RestaurantApp.ViewModels"
+             x:Class="RestaurantApp.Pages.AddPlatPage"
+             Title="Ajouter un plat">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AddPlatViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="15">
+            <Entry Placeholder="Nom" Text="{Binding Nom}" />
+            <Entry Placeholder="Description" Text="{Binding Description}" />
+            <Entry Placeholder="Prix" Keyboard="Numeric" Text="{Binding Prix}" />
+            
+            <Picker Title="Catégorie" ItemsSource="{Binding Categories}" SelectedItem="{Binding Categorie}" />
+
+            <Button Text="Ajouter le plat" Command="{Binding AjouterPlatCommand}" />
+            <Label Text="{Binding Message}" TextColor="Green" IsVisible="{Binding MessageVisible}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

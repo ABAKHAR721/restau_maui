@@ -1,0 +1,39 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:RestaurantApp.ViewModels"
+             xmlns:helpers="clr-namespace:RestaurantApp.Helpers"
+             x:Class="RestaurantApp.Pages.CommandePage"
+             Title="Commande">
+
+	<!-- ✅ Use shared instance -->
+	<ContentPage.BindingContext>
+		<x:Static Member="helpers:AppData.CommandeVM" />
+	</ContentPage.BindingContext>
+
+	<VerticalStackLayout Padding="20" Spacing="10">
+		<CollectionView ItemsSource="{Binding Commande}">
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+					<Frame BorderColor="Gray" Padding="10">
+						<VerticalStackLayout>
+							<Label Text="{Binding Plat.Nom}" FontAttributes="Bold"/>
+							<Label Text="{Binding Plat.Prix, StringFormat='Prix unitaire: {0} MAD'}"/>
+							<Label Text="{Binding Quantite, StringFormat='Quantité: {0}'}"/>
+							<Label Text="{Binding Total, StringFormat='Total: {0} MAD'}"/>
+						</VerticalStackLayout>
+					</Frame>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+		<Label Text="{Binding Total, StringFormat='Total: {0} MAD'}"
+               FontSize="20" FontAttributes="Bold" />
+
+		<Button Text="Valider Commande"
+                Command="{Binding ValiderCommandeCommand}" />
+
+		<Label Text="{Binding Message}"
+               TextColor="Green"
+               IsVisible="{Binding MessageVisible}" />
+	</VerticalStackLayout>
+</ContentPage>
